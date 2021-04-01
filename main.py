@@ -56,6 +56,9 @@ async def on_message(message):
         await message.channel.send(
             "Hi I'm Mr. Happy and my prefix is '$'! If you used this command I think you want a list of commands right?\nSo here it is:\n\n**• ping: a command that I will reply with Pong! The typical ping pong command.\n• inspire: I will reply it with a random inspirational quote.\n• spam: I will spam the word spam but you need to define a number of times to spam available numbers: 10, 50, 75, 100.**\n\nAnd I also can chat with you! Right now we have this quastions that you can ask me:\n\n**How are you?, What's your favorite food?, What do you eat?, Are you fine? and I can also answer for hello, hi and bye.**"
         )
+    
+    elif message.content == '$infinity':
+        await message.channel.send('.infinity')
 
     # Messages in english
     if message.content == 'hi' or message.content == 'Hi':
@@ -104,5 +107,5 @@ async def on_message(message):
         await message.channel.send("Tchauzinho!")
 
 
-# keep_alive() # makes it run forever
+keep_alive() # makes it run forever
 client.run(TOKEN) # makes the bot be online
