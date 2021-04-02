@@ -2,10 +2,21 @@ import discord
 import os
 import requests
 import json
+import random
 from keep_alive import keep_alive
+from replit import db
+
 
 TOKEN = os.environ['TOKEN']
 client = discord.Client()
+
+sad_words = ["sad", "depressed", "unhappy", "angry", "miserable", "depressing"]
+
+starter_encouragements = [
+    "Chear up!",
+    "Hang in there.",
+    "You are a great person/bot!"
+]
 
 
 def get_quote():
@@ -13,6 +24,15 @@ def get_quote():
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return quote
+
+
+def update_encouragements(encouraging_message):
+    if "encouragements" in db.key():
+        encouragements = db["encouragements"]
+        encouragements.append(encouraging_message)
+        db["encouragements"] = encouragements
+    else:
+        pass
 
 
 # Says when it's ready to receive messages
@@ -27,83 +47,84 @@ async def on_message(message):
     # Doesn't respond to its own messages
     if message.author == client.user:
         return
+    
+    msg = message.content
 
     # Commands
-    if message.content == '$ping':
+    if msg == '$ping':
         await message.channel.send('Pong!')
 
-    elif message.content.startswith('$inspire'):
+    elif msg == '$inspire':
         quote = get_quote()
         await message.channel.send(quote)
 
-    elif message.content.startswith("$spam 10"):
-        for x in range(10):
-            await message.channel.send("spam")
+    elif msg.startswith("spam"):
+        if str(msg[3:]).isdigit():
+            msg = int(msg[3:])
+        else:
+            await message.channel.send("The times to spam is not numeric… Try Again")
+        
+        if 1 <= msg <= 100:
+            for x in range(msg):
+                await message.channel.send("spam")
+        else:
+            await message.channel.send("Number of times to spam not in range 1 - 100")
 
-    elif message.content.startswith("$spam 50"):
-        for x in range(50):
-            await message.channel.send("spam")
-
-    elif message.content.startswith("$spam 75"):
-        for x in range(75):
-            await message.channel.send("spam")
-
-    elif message.content.startswith("$spam 100"):
-        for x in range(100):
-            await message.channel.send("spam")
-
-    elif message.content.startswith("$help"):
+    elif msg == '$help':
         await message.channel.send(
-            "Hi I'm Mr. Happy and my prefix is '$'! If you used this command I think you want a list of commands right?\nSo here it is:\n\n**• ping: a command that I will reply with Pong! The typical ping pong command.\n• inspire: I will reply it with a random inspirational quote.\n• spam: I will spam the word spam but you need to define a number of times to spam available numbers: 10, 50, 75, 100.**\n\nAnd I also can chat with you! Right now we have this quastions that you can ask me:\n\n**How are you?, What's your favorite food?, What do you eat?, Are you fine? and I can also answer for hello, hi and bye.**"
+            "Hi I'm Mr. Happy and my prefix is '$'! If you used this command I think you want a list of commands right?\nSo here it is:\n\n**• ping: a command that I will reply with Pong! The typical ping pong command.\n• inspire: I will reply it with a random inspirational quote.\n• spam: I will spam the word spam but you need to define a number of times to spam  in a range of 1 - 100.**\n\nAnd I also can chat with you! Right now we have this quastions that you can ask me:\n\n**How are you?, What's your favorite food?, What do you eat?, Are you fine? and I can also answer for hello, hi and bye.**"
         )
     
-    elif message.content == '$infinity':
-        await message.channel.send('.infinity')
+    elif msg == '$infinity':
+        await message.channel.send('s.infinity')
+    
+    elif any(word in msg for word in sad_words):
+        await message.channel.send(random.choice(starter_encouragements))
 
     # Messages in english
-    if message.content == 'hi' or message.content == 'Hi':
+    if msg == 'hi' or msg == 'Hi':
         await message.channel.send('Hello!')
 
-    elif message.content == 'hello' or message.content == 'Hello':
+    elif msg == 'hello' or msg == 'Hello':
         await message.channel.send('Hi!')
 
-    elif message.content == 'How are you?' or message.content == 'how are you?':
+    elif msg == 'How are you?' or msg == 'how are you?':
         await message.channel.send("I'm fine")
 
-    elif message.content == "What's your favorite food?" or message.content == "what's your favorite food?":
+    elif msg == "What's your favorite food?" or msg == "what's your favorite food?":
         await message.channel.send("Sushi with sweet potato!")
 
-    elif message.content == "What do you eat?" or message.content == "what do you eat?":
+    elif msg == "What do you eat?" or msg == "what do you eat?":
         await message.channel.send(
             "I don't eat, I'm just a simple bot :pensive:")
 
-    elif message.content == "Are you fine?" or message.content == "are you fine?":
+    elif msg == "Are you fine?" or msg == "are you fine?":
         await message.channel.send("Yes, I am")
 
-    elif message.content == "Bye" or message.content == "bye":
+    elif msg == "Bye" or msg == "bye":
         await message.channel.send("Good bye!")
 
     # Messages in portuguese
-    if message.content == 'oi' or message.content == 'Oi':
+    if msg == 'oi' or msg == 'Oi':
         await message.channel.send('Olá!')
 
-    elif message.content == 'olá' or message.content == 'Olá':
+    elif msg == 'olá' or msg == 'Olá':
         await message.channel.send('Oi!')
 
-    elif message.content == 'Tudo bem?':
+    elif msg == 'Tudo bem?' or msg == 'tudo bem?':
         await message.channel.send('Tudo')
 
-    elif message.content == 'Como vai?':
+    elif msg == 'Como vai?' or msg == 'como vai?':
         await message.channel.send('Eu vou bem')
 
-    elif message.content == 'Qual é sua comida preferida?':
+    elif msg == 'Qual é sua comida preferida?' or msg == 'qual é sua comida preferida?':
         await message.channel.send('Batata doce com sushi!')
 
-    elif message.content == 'O que você come?':
+    elif msg == 'O que você come?' or msg == 'o que você come?':
         await message.channel.send(
             'Eu não como, sou só um simples bot :pensive:')
 
-    elif message.content == "Tchau" or message.content == "tchau":
+    elif msg == "Tchau" or msg == "tchau":
         await message.channel.send("Tchauzinho!")
 
 
