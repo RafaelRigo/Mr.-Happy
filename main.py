@@ -32,7 +32,13 @@ def update_encouragements(encouraging_message):
         encouragements.append(encouraging_message)
         db["encouragements"] = encouragements
     else:
-        pass
+        db["encouragements"] = [encouraging_message]
+
+def delete_encouragement(index):
+    encouragements = db["encouragements"]
+    if len(encouragements) > index:
+        del encouragements[index]
+        db["encouragements"] = encouragements
 
 
 # Says when it's ready to receive messages
@@ -59,8 +65,8 @@ async def on_message(message):
         await message.channel.send(quote)
 
     elif msg.startswith("spam"):
-        if str(msg[3:]).isdigit():
-            msg = int(msg[3:])
+        if str(msg[4:]).isdigit():
+            msg = int(msg[5:])
         else:
             await message.channel.send("The times to spam is not numeric… Try Again")
         
@@ -78,8 +84,45 @@ async def on_message(message):
     elif msg == '$infinity':
         await message.channel.send('s.infinity')
     
+    options = starter_encouragements
+    if "encouragements" in db.keys():
+        options = options + db["encouragements"]
+    
     elif any(word in msg for word in sad_words):
-        await message.channel.send(random.choice(starter_encouragements))
+        await message.channel.send(random.choice(options))
+    
+    elif msg.startswith("$newencouragement"):
+        encouraging_message = msg.split()
+    
+    elif msg.startswith('$ppt'):
+        choices = ['pedra', 'papel', 'tesoura']
+        bot = random.choice(choices).lower()
+        player = str(msg[5:])
+
+        await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
+        if player == bot:
+            await message.channel.send('Deu um empate! :clap:')
+        
+        elif player == 'pedra':
+            if bot == 'tesoura':
+                await message.channel.send('Você venceu! :sob:')
+            else:
+                await message.channel.send("Eu venci! :stuck_out_tongue_winking_eye:")
+        
+        elif player == "tesoura":
+            if bot == "papel":
+                await message.channel.send("Você venceu! :sob:")
+            else:
+                await message.channel.send("Eu venci! :stuck_out_tongue_winking_eye:")
+
+        elif player == "papel":
+            if bot == "pedra":
+                await message.channel.send("Você venceu! :sob:")
+            else:
+                await message.channel.send("Eu venci! :stuck_out_tongue_winking_eye:")
+
+        else:
+            await message.channel.send("Essa jogada não existe bobinho(a)! :laughing:")
 
     # Messages in english
     if msg == 'hi' or msg == 'Hi':
