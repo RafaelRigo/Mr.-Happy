@@ -99,26 +99,32 @@ async def on_message(message):
         bot = random.choice(choices).lower()
         player = str(msg[5:])
 
-        await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
         if player == bot:
+            await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
             await message.channel.send('Deu um empate! :clap:')
         
         elif player == 'pedra':
             if bot == 'tesoura':
+                await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
                 await message.channel.send('Você venceu! :sob:')
             else:
+                await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
                 await message.channel.send("Eu venci! :stuck_out_tongue_winking_eye:")
         
         elif player == "tesoura":
             if bot == "papel":
+                await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
                 await message.channel.send("Você venceu! :sob:")
             else:
+                await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
                 await message.channel.send("Eu venci! :stuck_out_tongue_winking_eye:")
 
         elif player == "papel":
             if bot == "pedra":
+                await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
                 await message.channel.send("Você venceu! :sob:")
             else:
+                await message.channel.send("Você escolheu " + player + " e eu escolhi " + bot + ".")
                 await message.channel.send("Eu venci! :stuck_out_tongue_winking_eye:")
 
         else:
