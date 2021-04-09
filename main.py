@@ -16,7 +16,7 @@ starter_encouragements = [
     "Chear up!", "Hang in there.", "You are a great person!"
 ]
 encorajamentos_iniciais = [
-    "Anima!", "Auguenta aí.", "Você é uma pessoa ótima!"
+    "Anima!", "Você é uma ótima pessoa!", "Olhe a natureza para relaxar um pouco"
 ]
 
 if "responding" not in db.keys():
@@ -31,6 +31,7 @@ def get_quote():
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return quote
+
 
 
 def update_encouragements(encouraging_message):
@@ -121,7 +122,7 @@ async def on_message(message):
             index = int(msg.split("$del encouragement", 1)[1])
             delete_encouragement(index)
             encouragements = db["encouragements"]
-        await message.channel.send(encouragements[0:])
+        await message.channel.send(encouragements)
 
     if msg.startswith("$list encouragements"):
         encouragements = []
@@ -157,7 +158,7 @@ async def on_message(message):
             indice = int(msg.split("$remover encorajamento", 1)[1])
             remover_encorajamento(indice)
             encorajamentos = db["encorajamentos"]
-        await message.channel.send(encorajamentos[0:])
+        await message.channel.send(encorajamentos)
 
     if msg.startswith("$listar encorajamentos"):
         encorajamentos = []
@@ -167,7 +168,7 @@ async def on_message(message):
 
     if msg.startswith("$respostas encorajadoras"):
         value = msg.split("$respostas encorajadoras ", 1)[1]
-        if value.lower() == 'ativado':
+        if value.lower() == 'ativadas':
             db['respondendo'] = True
             await message.channel.send('Respostas encorajadoras estão ativadas.')
         else:
@@ -220,6 +221,53 @@ async def on_message(message):
         else:
             await message.channel.send(
                 "Essa jogada não existe bobinho(a)! :laughing:")
+
+    if msg.startswith('$rps'):
+        choices = ['rock', 'paper', 'scissors']
+        bot = random.choice(choices).lower()
+        player = str(msg[5:])
+
+        if player == bot:
+            await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+            await message.channel.send("It's a tie! :clap:")
+
+        elif player == 'rock':
+            if bot == 'scissors':
+                await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+                await message.channel.send('you win! :sob:')
+            else:
+                await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+                await message.channel.send(
+                    "I win! :stuck_out_tongue_winking_eye:")
+
+        elif player == "scissors":
+            if bot == "paper":
+                await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+                await message.channel.send("You win! :sob:")
+            else:
+                await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+                await message.channel.send(
+                    "I win! :stuck_out_tongue_winking_eye:")
+
+        elif player == "paper":
+            if bot == "rock":
+                await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+                await message.channel.send("You win! :sob:")
+            else:
+                await message.channel.send("You chose " + player +
+                                       " and I chose " + bot + ".")
+                await message.channel.send(
+                    "I win! :stuck_out_tongue_winking_eye:")
+
+        else:
+            await message.channel.send(
+                "This move doesn't exist silly! :laughing:")
 
     if msg.startswith("$say"):
         msg = str(msg[5:])
