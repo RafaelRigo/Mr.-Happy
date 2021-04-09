@@ -4,26 +4,12 @@ import requests
 import json
 import random
 from keep_alive import keep_alive
-from replit import db
+from asyncio import sleep
+from discord.ext import commands
 
 TOKEN = os.environ['TOKEN']
 client = discord.Client()
-
-sad_words = ["sad", "depressed", "unhappy", "angry", "miserable", "depressing"]
-palavras_tristes = ["triste", "depressido", "infeliz", "bravo", "miserável", "depressivo"]
-
-starter_encouragements = [
-    "Chear up!", "Hang in there.", "You are a great person!"
-]
-encorajamentos_iniciais = [
-    "Anima!", "Você é uma ótima pessoa!", "Olhe a natureza para relaxar um pouco"
-]
-
-if "responding" not in db.keys():
-    db["responding"] = True
-
-if "respondendo" not in db.keys():
-    db["respondendo"] = True
+bot = commands.Bot(command_prefix="$", description="Simple economy bot")
 
 
 def get_quote():
@@ -31,36 +17,6 @@ def get_quote():
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return quote
-
-
-
-def update_encouragements(encouraging_message):
-    if "encouragements" in db.keys():
-        encouragements = db["encouragements"]
-        encouragements.append(encouraging_message)
-        db["encouragements"] = encouragements
-    else:
-        db["encouragements"] = [encouraging_message]
-
-
-def delete_encouragement(index):
-    encouragements = db["encouragements"]
-    if len(encouragements) > index:
-        del encouragements[index]
-        db["encouragements"] = encouragements
-
-
-def atualizar_encorajamentos(mensagem_encorajadora):
-    if "encorajamentos" in db.keys():
-        encorajamentos = db["encorajamentos"]
-        encorajamentos.append(mensagem_encorajadora)
-        db["encorajamentos"] = encorajamentos
-
-def remover_encorajamento(indice):
-    encorajamentos = db["encorajamentos"]
-    if len(encorajamentos) > indice:
-        del encorajamentos[indice]
-        db["encorajamentos"] = encorajamentos
 
 
 # Says when it's ready to receive messages
@@ -102,78 +58,6 @@ async def on_message(message):
 
     if msg == '$infinity':
         await message.channel.send('s.infinity')
-
-    if db["responding"]:
-        options = starter_encouragements
-        if "encouragements" in db.keys():
-            options += db["encouragements"]
-
-        if any(word in msg for word in sad_words):
-            await message.channel.send(random.choice(options))
-
-    if msg.startswith("$new encouragement"):
-        encouraging_message = msg.split("$new encouragement ", 1)[1]
-        update_encouragements(encouraging_message)
-        await message.channel.send("New encouraging message added")
-
-    if msg.startswith("$del encouragement"):
-        encouragements = []
-        if "encouragements" in db.keys():
-            index = int(msg.split("$del encouragement", 1)[1])
-            delete_encouragement(index)
-            encouragements = db["encouragements"]
-        await message.channel.send(encouragements)
-
-    if msg.startswith("$list encouragements"):
-        encouragements = []
-        if "encouragements" in db.keys():
-            encouragements = db["encouragements"]
-        await message.channel.send(encouragements[0:])
-
-    if msg.startswith("$encouragement responding"):
-        value = msg.split("$encouragement responding ", 1)[1]
-        if value.lower() == 'true':
-            db['responding'] = True
-            await message.channel.send('Encouragement responding is on.')
-        else:
-            db['responding'] = False
-            await message.channel.send('Encouragement responding is off.')
-    
-    if db["respondendo"]:
-        opções = encorajamentos_iniciais
-        if "encorajamentos" in db.keys():
-            opções += db["encorajamentos"]
-        
-        if any(word in msg for word in palavras_tristes):
-            await message.channel.send(random.choice(opções))
-    
-    if msg.startswith("$novo encorajamento"):
-        mensagem_encorajadora = msg.split("$novo encorajamento ", 1)[1]
-        atualizar_encorajamentos(mensagem_encorajadora)
-        await message.channel.send("Novo encorajamento adicionado")
-
-    if msg.startswith("$remover encorajamento"):
-        encorajamentos = []
-        if "encorajamentos" in db.keys():
-            indice = int(msg.split("$remover encorajamento", 1)[1])
-            remover_encorajamento(indice)
-            encorajamentos = db["encorajamentos"]
-        await message.channel.send(encorajamentos)
-
-    if msg.startswith("$listar encorajamentos"):
-        encorajamentos = []
-        if "encorajamentos" in db.keys():
-            encorajamentos = db["encorajamentos"]
-        await message.channel.send(encorajamentos[0:])
-
-    if msg.startswith("$respostas encorajadoras"):
-        value = msg.split("$respostas encorajadoras ", 1)[1]
-        if value.lower() == 'ativadas':
-            db['respondendo'] = True
-            await message.channel.send('Respostas encorajadoras estão ativadas.')
-        else:
-            db['respondendo'] = False
-            await message.channel.send('Respostas encorajadoras estão desativadas.')
 
     if msg.startswith('$ppt'):
         choices = ['pedra', 'papel', 'tesoura']
