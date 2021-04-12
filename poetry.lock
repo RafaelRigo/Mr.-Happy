@@ -68,6 +68,14 @@ version = "1.0.1"
 
 [[package]]
 category = "main"
+description = "And nicer looking interactive help menu for discord.py"
+name = "discord-pretty-help"
+optional = false
+python-versions = ">=3.6,<4.0"
+version = "1.3.0"
+
+[[package]]
+category = "main"
 description = "A Python wrapper for the Discord API"
 name = "discord.py"
 optional = false
@@ -80,6 +88,18 @@ aiohttp = ">=3.6.0,<3.8.0"
 [package.extras]
 docs = ["sphinx (3.0.3)", "sphinxcontrib-trio (1.1.2)", "sphinxcontrib-websupport"]
 voice = ["PyNaCl (>=1.3.0,<1.5)"]
+
+[[package]]
+category = "main"
+description = "Simple and easy-to-use python database"
+name = "easypydb"
+optional = false
+python-versions = "*"
+version = "0.1"
+
+[package.dependencies]
+requests = "*"
+s1db = "*"
 
 [[package]]
 category = "main"
@@ -162,6 +182,29 @@ werkzeug = ">=1.0.1,<2.0.0"
 
 [[package]]
 category = "main"
+description = "Python HTTP for Humans."
+name = "requests"
+optional = false
+python-versions = "*"
+version = "2.15.1"
+
+[package.extras]
+security = ["cryptography (>=1.3.4)", "idna (>=2.0.0)", "pyOpenSSL (>=0.14)"]
+socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
+
+[[package]]
+category = "main"
+description = "S1 API Library for Python"
+name = "s1db"
+optional = false
+python-versions = "*"
+version = "1.0.3"
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
+category = "main"
 description = "Backported and Experimental Type Hints for Python 3.5+"
 name = "typing-extensions"
 optional = false
@@ -193,7 +236,7 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [metadata]
-content-hash = "776fd9c4b64d05d562615bb0778dc1dcd911cca4f68eec8f592bba66b2a2a6ba"
+content-hash = "f097570fa3d986b32d5112d8a7b4d1b291443ef470e9ff0ebd3c11b100d7569f"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -256,9 +299,16 @@ discord = [
     {file = "discord-1.0.1-py3-none-any.whl", hash = "sha256:9d4debb4a37845543bd4b92cb195bc53a302797333e768e70344222857ff1559"},
     {file = "discord-1.0.1.tar.gz", hash = "sha256:ff6653655e342e7721dfb3f10421345fd852c2a33f2cca912b1c39b3778a9429"},
 ]
+discord-pretty-help = [
+    {file = "discord-pretty-help-1.3.0.tar.gz", hash = "sha256:3c76a8d0fb5046b1a0bf7441d6575bfdfb827575f5a3208a0873451e508dcef0"},
+    {file = "discord_pretty_help-1.3.0-py3-none-any.whl", hash = "sha256:b61ab50814bff10f073d7b5dda0d2f9124274e763bdadb9c20a05eb6499b9e39"},
+]
 "discord.py" = [
     {file = "discord.py-1.6.0-py3-none-any.whl", hash = "sha256:3df148daf6fbcc7ab5b11042368a3cd5f7b730b62f09fb5d3cbceff59bcfbb12"},
     {file = "discord.py-1.6.0.tar.gz", hash = "sha256:ba8be99ff1b8c616f7b6dcb700460d0222b29d4c11048e74366954c465fdd05f"},
+]
+easypydb = [
+    {file = "easypydb-0.1.tar.gz", hash = "sha256:ad70eebfa81666719476286c116fc194c0560eef6aaeb44a913e75942f86bc5f"},
 ]
 flask = [
     {file = "Flask-1.1.2-py2.py3-none-any.whl", hash = "sha256:8a4fdd8936eba2512e9c85df320a37e694c93945b33ef33c89946a340a238557"},
@@ -372,6 +422,14 @@ multidict = [
 replit = [
     {file = "replit-3.0.0-py3-none-any.whl", hash = "sha256:3dd4f21b8b2a44b8c645a15e87398fa129b356cb6a88faa5eedd30374cc404e1"},
     {file = "replit-3.0.0.tar.gz", hash = "sha256:7558e5ce46333062849b2c3be058a90d7769f6d7b1ad2382e78981cfaede2aa1"},
+]
+requests = [
+    {file = "requests-2.15.1-py2.py3-none-any.whl", hash = "sha256:ff753b2196cd18b1bbeddc9dcd5c864056599f7a7d9a4fb5677e723efa2b7fb9"},
+    {file = "requests-2.15.1.tar.gz", hash = "sha256:e5659b9315a0610505e050bb7190bf6fa2ccee1ac295f2b760ef9d8a03ebbb2e"},
+]
+s1db = [
+    {file = "s1db-1.0.3-py3-none-any.whl", hash = "sha256:eac85c5eba3a3ba2fa0409fef30b0615c16f7c11d9365640dc62b714e9514f92"},
+    {file = "s1db-1.0.3.tar.gz", hash = "sha256:f4a1bcb7135af13d4a6a7e8884b7dde03d2992a289120f423d7dcc6689b9e951"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.7.4.3-py2-none-any.whl", hash = "sha256:dafc7639cde7f1b6e1acc0f457842a83e722ccca8eef5270af2d74792619a89f"},
