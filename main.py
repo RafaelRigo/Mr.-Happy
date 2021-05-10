@@ -22,7 +22,7 @@ from keep_alive import keep_alive
 
 load_dotenv()
 
-TOKEN = "token"
+TOKEN = os.getenv['TOKEN']
 
 bot = commands.Bot(
     command_prefix="$",
