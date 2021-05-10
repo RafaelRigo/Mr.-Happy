@@ -7,13 +7,13 @@ class Fun(commands.Cog):
     @commands.command(name="ping",
                       brief="Ping Pong!",
                       help="Use this command to make me reply with Pong!")
-    async def _ping(self, ctx):
+    async def ping(self, ctx):
         await ctx.send("Pong!")
 
     @commands.command(name="say",
                       brief="Makes me say a word",
                       help="Use this command to make me say any word you want")
-    async def _say(self, ctx, msg_to_say):
+    async def say(self, ctx, msg_to_say):
         await ctx.send(msg_to_say)
 
     @commands.command(
@@ -22,7 +22,7 @@ class Fun(commands.Cog):
         help=
         "Make me spam a word in a range of 1 - 100."
     )
-    async def _spam(self, ctx, word, times: int):
+    async def spam(self, ctx, word, times: int):
         for i in range(times):
             await ctx.send(word)
 
@@ -32,7 +32,7 @@ class Fun(commands.Cog):
         help=
         "Just like a normal rock paper scissors. Rock beats scissors, scissors beats paper and paper beats rock."
     )
-    async def _rps(self, ctx, move):
+    async def rps(self, ctx, move):
         choices = ['rock', 'paper', 'scissors']
         bot = random.choice(choices).lower()
         player = move
@@ -83,7 +83,7 @@ class Fun(commands.Cog):
         brief="Rock paper scissors in portuguese.",
         help="Um pedra papel tesoura normal. Pedra vence tesoura, tesoura vence papel e papel vence pedra."
     )
-    async def _ppt(self, ctx, jogada):
+    async def ppt(self, ctx, jogada):
         choices = ['pedra', 'papel', 'tesoura']
         bot = random.choice(choices).lower()
         player = jogada

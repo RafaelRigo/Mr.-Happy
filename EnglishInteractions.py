@@ -1,12 +1,13 @@
-from discord.ext.commands import command, Cog
+from discord.ext import commands
 
 
-class InteractionEnglish(Cog):
-    @Cog.listener()
+class InteractionEnglish(commands.Cog):
+    @commands.Cog.listener()
     async def on_message(self, message):
         msg = message.content
-        hi = ["hi", "hello"]
-        bye = ["bye", "good bye"]
+        hi = ["hi", "hello", "hi!"]
+        bye = ["bye", "good bye", "bye!"]
+
         if str(msg).lower() in hi:
             await message.channel.send('Hello!')
 
