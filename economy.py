@@ -7,7 +7,7 @@ from easypydb import DB
 
 load_dotenv()
 
-dbtoken = os.environ["dbtoken"]
+dbtoken = os.getenv("dbtoken")
 database = DB("EconomyDB", dbtoken)
 
 
