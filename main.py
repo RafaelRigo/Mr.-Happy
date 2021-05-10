@@ -1,5 +1,6 @@
 import discord
 import os
+from dotenv import load_dotenv
 from asyncio import sleep
 from discord.ext import commands
 from pretty_help import DefaultMenu, PrettyHelp
@@ -11,6 +12,7 @@ from moderation import Moderation
 from economy import Economy
 # from routes.utils import app
 from quart import Quart, redirect, url_for, render_template, request
+from keep_alive import keep_alive
 
 # app = Quart(__name__)
 
@@ -18,9 +20,9 @@ from quart import Quart, redirect, url_for, render_template, request
 # async def home():
 #     return "I'm alive!"
 
+load_dotenv()
 
-TOKEN = os.environ['TOKEN']
-
+TOKEN = "token"
 
 bot = commands.Bot(
     command_prefix="$",
@@ -30,6 +32,7 @@ bot = commands.Bot(
 nav = DefaultMenu("◀️", "▶️", "❌")
 bot.help_command = PrettyHelp(navigation=nav, color=discord.Colour.orange())
 
+
 @bot.event
 async def on_ready():
     print("I'm in")
@@ -38,10 +41,14 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-        await ctx.send(f'{ctx.message.author.mention} you need to wait {error.retry_after:.2f} seconds to use this command again.')
+        await ctx.send(
+            f'{ctx.message.author.mention} you need to wait {error.retry_after:.2f} seconds to use this command again.')
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("This command doesn't exist! Use $help to see what commands you can use.")
     raise error
+
+
+keep_alive()
 
 
 def run():

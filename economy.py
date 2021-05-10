@@ -1,14 +1,18 @@
 from discord.ext import commands
 import random
 import os
+from dotenv import load_dotenv
 import discord
 from easypydb import DB
 
-dbtoken = os.environ["dbtoken"]
+load_dotenv()
+
+dbtoken = "token"
 database = DB("EconomyDB", dbtoken)
 
+
 class Economy(commands.Cog):
-    '''All Economy commands'''
+    """All Economy commands"""
 
     @commands.command(
         name="work",
@@ -19,7 +23,8 @@ class Economy(commands.Cog):
     async def work(self, ctx):
         database.load()
         money = random.randint(1000, 4000)
-        embed = discord.Embed(title=f"{ctx.message.author}", description=f"{ctx.message.author.mention} worked hard and received {money} happy coins!")
+        embed = discord.Embed(title=f"{ctx.message.author}",
+                              description=f"{ctx.message.author.mention} worked hard and received {money} happy coins!")
         await ctx.send(embed=embed)
         try:
             balance = database[str(ctx.message.author.id)]
@@ -32,9 +37,9 @@ class Economy(commands.Cog):
         brief="Check your balance",
         help="Get the total amount of money that is in your balance"
     )
-    async def money(self, ctx, member: discord.User=None):
+    async def money(self, ctx, member: discord.User = None):
         database.load()
-        if member == None:
+        if member is None:
             try:
                 balance = database[str(ctx.message.author.id)]
             except:
@@ -46,7 +51,7 @@ class Economy(commands.Cog):
             except:
                 balance = 0
             await ctx.send(f"{member.mention} has {balance} happy coins!")
-    
+
     @commands.command(
         name="pay",
         brief="A command to give money to other people",
@@ -62,12 +67,15 @@ class Economy(commands.Cog):
             receiverbalance = database[str(member.id)]
         except:
             receiverbalance = 0
-        
+
         if int(money) > balance:
-            await ctx.send(f"{ctx.message.author.mention} you don't have enough happy coins to pay {money} happy coins to {member.mention}")
+            await ctx.send(
+                f"{ctx.message.author.mention} you don't have enough happy coins to pay {money} happy coins to {member.mention}")
         else:
             database[str(member.id)] = receiverbalance + int(money)
             database[str(ctx.message.author.id)] = balance - int(money)
 
-            embed=discord.Embed(title="Payment succesfully!", description=f"{ctx.message.author.mention} your payment of {money} happy coins to {member.mention} was succesfull!", color=discord.Colour.orange())
+            embed = discord.Embed(title="Payment succesfully!",
+                                  description=f"{ctx.message.author.mention} your payment of {money} happy coins to {member.mention} was succesfull!",
+                                  color=discord.Colour.orange())
             await ctx.send(embed=embed)
