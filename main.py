@@ -9,16 +9,7 @@ from fun import Fun
 from moderation import Moderation
 from economy import Economy
 from zen import ZenQuotes
-# from routes.utils import app
-from quart import Quart, redirect, url_for, render_template, request
 from keep_alive import keep_alive
-
-# app = Quart(__name__)
-
-# @app.route("/")
-# async def home():
-#     return "I'm alive!"
-
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
@@ -53,7 +44,6 @@ def run():
     bot.add_cog(Fun(bot))
     bot.add_cog(Economy(bot))
     bot.run(TOKEN)
-    bot.loop.create_task(app.run_task('0.0.0.0'))
 
 
 if __name__ == "__main__":

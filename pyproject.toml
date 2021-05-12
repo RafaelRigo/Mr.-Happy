@@ -12,6 +12,7 @@ replit = "^3.0.0"
 discord-pretty-help = "^1.3.0"
 easypydb = "^0.1"
 quart = "^0.14.1"
+python-dotenv = "^0.17.1"
 
 [tool.poetry.dev-dependencies]
 
