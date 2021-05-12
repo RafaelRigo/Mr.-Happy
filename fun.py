@@ -20,13 +20,13 @@ class Fun(commands.Cog):
         if player == bot:
             await ctx.send("You chose " + player +
                                        " and I chose " + bot + ".")
-            await ctx.send("It's a tie! :clap:")
+            await ctx.send("It's a tie! :scale:")
 
         elif player == 'rock':
             if bot == 'scissors':
                 await ctx.send("You chose " + player +
                                            " and I chose " + bot + ".")
-                await ctx.send('you win! :sob:')
+                await ctx.send('you win! :clap:')
             else:
                 await ctx.send("You chose " + player +
                                            " and I chose " + bot + ".")
@@ -37,7 +37,7 @@ class Fun(commands.Cog):
             if bot == "paper":
                 await ctx.send("You chose " + player +
                                            " and I chose " + bot + ".")
-                await ctx.send("You win! :sob:")
+                await ctx.send("You win! :clap:")
             else:
                 await ctx.send("You chose " + player +
                                            " and I chose " + bot + ".")
@@ -48,7 +48,7 @@ class Fun(commands.Cog):
             if bot == "rock":
                 await ctx.send("You chose " + player +
                                            " and I chose " + bot + ".")
-                await ctx.send("You win! :sob:")
+                await ctx.send("You win! :clap:")
             else:
                 await ctx.send("You chose " + player +
                                            " and I chose " + bot + ".")
