@@ -18,13 +18,21 @@ class Economy(commands.Cog):
         database.load()
         money = random.randint(25, 100)
         embed = discord.Embed(title=f"{ctx.message.author}",
-                              description=f"{ctx.message.author.mention} worked hard and received {money} happy coins!")
+                            description=f"{ctx.message.author.mention} worked hard and received {money} happy coins!")
         await ctx.send(embed=embed)
         try:
             balance = database[str(ctx.message.author.id)]
         except:
             balance = 0
         database[str(ctx.message.author.id)] = balance + money
+    
+    @work.error
+    async def work_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            await ctx.send(
+                f'{ctx.message.author.mention} you need to wait {error.retry_after:.0f} seconds to use this command again.')
+        else:
+            raise error
 
     @commands.command()
     async def money(self, ctx, member: discord.User = None):

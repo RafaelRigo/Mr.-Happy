@@ -25,6 +25,14 @@ class Economia(commands.Cog):
         except:
             balance = 0
         database[str(ctx.message.author.id)] = balance + money
+    
+    @trabalhar.error
+    async def trabalhar_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            await ctx.send(
+                f'{ctx.message.author.mention} você tem que esperar {error.retry_after:.0f} segundos para trabalhar denovo.')
+        else:
+            raise error
 
     @commands.command()
     async def dinheiro(self, ctx, member: discord.User = None):

@@ -81,18 +81,10 @@ async def diversao(ctx):
     embed.add_field(name='ppt', value='pedra papel tesoura\n\n**Uso:**\n`=ppt <pedra, papel ou tesoura>`')
     
     await ctx.send(embed=embed)
-
-
+    
 @bot.event
 async def on_ready():
     print("I'm in")
-
-
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, cmd.CommandOnCooldown):
-        await ctx.send(
-            f'{ctx.message.author.mention} you need to wait {error.retry_after:.2f} seconds to use this command again.')
 
 
 keep_alive()
