@@ -6,12 +6,7 @@ import random
 
 
 class ZenQuotes(commands.Cog):
-    """All zen quotes commands"""
-    @commands.command(
-        name='zenquote',
-        brief='A command to get a random zen quote',
-        help='Use this command for me to send a random zen quote :)'
-    )
+    @commands.command()
     async def zenquote(self, ctx):
         response = requests.get("https://zenquotes.io/api/random")
         json_data = json.loads(response.text)
@@ -24,11 +19,7 @@ class ZenQuotes(commands.Cog):
         except:
             await ctx.send("An error occurred…")
 
-    @commands.command(
-        name='dailyquote',
-        brief='A command to get the daily zen quote',
-        help='Use this command for me to send the daily zen quote'
-    )
+    @commands.command()
     async def dailyquote(self, ctx):
         response = requests.get("https://zenquotes.io/api/today")
         json_data = json.loads(response.text)

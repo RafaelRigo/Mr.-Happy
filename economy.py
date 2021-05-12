@@ -12,13 +12,7 @@ database = DB("EconomyDB", dbtoken)
 
 
 class Economy(commands.Cog):
-    """All Economy commands"""
-
-    @commands.command(
-        name="work",
-        brief="Work and get some money",
-        help="Use this command to work and earn a random amount of money"
-    )
+    @commands.command()
     @commands.cooldown(1, 43200, commands.BucketType.user)
     async def work(self, ctx):
         database.load()
@@ -32,11 +26,7 @@ class Economy(commands.Cog):
             balance = 0
         database[str(ctx.message.author.id)] = balance + money
 
-    @commands.command(
-        name="money",
-        brief="Check your balance",
-        help="Get the total amount of money that is in your balance"
-    )
+    @commands.command()
     async def money(self, ctx, member: discord.User = None):
         database.load()
         if member is None:
@@ -52,11 +42,7 @@ class Economy(commands.Cog):
                 balance = 0
             await ctx.send(f"{member.mention} has {balance} happy coins!")
 
-    @commands.command(
-        name="pay",
-        brief="A command to give money to other people",
-        help="Use this command to give happy coins to other people"
-    )
+    @commands.command()
     async def pay(self, ctx, member: discord.User, money):
         database.load()
         try:

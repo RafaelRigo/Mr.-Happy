@@ -3,25 +3,15 @@ import random
 
 
 class Fun(commands.Cog):
-    '''All the fun commands'''
-    @commands.command(name="ping",
-                      brief="Ping Pong!",
-                      help="Use this command to make me reply with Pong!")
+    @commands.command()
     async def ping(self, ctx):
         await ctx.send("Pong!")
 
-    @commands.command(name="say",
-                      brief="Makes me say a word",
-                      help="Use this command to make me say any word you want")
+    @commands.command()
     async def say(self, ctx, msg_to_say):
         await ctx.send(msg_to_say)
 
-    @commands.command(
-        name="rps",
-        brief="A rock paper scissors game",
-        help=
-        "Just like a normal rock paper scissors. Rock beats scissors, scissors beats paper and paper beats rock."
-    )
+    @commands.command()
     async def rps(self, ctx, move):
         choices = ['rock', 'paper', 'scissors']
         bot = random.choice(choices).lower()
