@@ -15,7 +15,7 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 bot = commands.Bot(
-    command_prefix="$",
+    command_prefix=">",
     description="A friendly bot with games, cool commands and an economy system."
 )
 
