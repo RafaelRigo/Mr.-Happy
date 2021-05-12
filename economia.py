@@ -11,14 +11,14 @@ dbtoken = os.getenv("dbtoken")
 database = DB("EconomyDB", dbtoken)
 
 
-class Economy(commands.Cog):
+class Economia(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 43200, commands.BucketType.user)
-    async def work(self, ctx):
+    async def trabalhar(self, ctx):
         database.load()
         money = random.randint(1000, 4000)
         embed = discord.Embed(title=f"{ctx.message.author}",
-                              description=f"{ctx.message.author.mention} worked hard and received {money} happy coins!")
+                              description=f"{ctx.message.author.mention} trabalhou duro e recebeu {money} happy coins!")
         await ctx.send(embed=embed)
         try:
             balance = database[str(ctx.message.author.id)]
@@ -27,23 +27,23 @@ class Economy(commands.Cog):
         database[str(ctx.message.author.id)] = balance + money
 
     @commands.command()
-    async def money(self, ctx, member: discord.User = None):
+    async def dinheiro(self, ctx, member: discord.User = None):
         database.load()
         if member is None:
             try:
                 balance = database[str(ctx.message.author.id)]
             except:
                 balance = 0
-            await ctx.send(f"{ctx.message.author.mention} you have {balance} happy coins!")
+            await ctx.send(f"{ctx.message.author.mention} você tem {balance} happy coins!")
         else:
             try:
                 balance = database[str(member.id)]
             except:
                 balance = 0
-            await ctx.send(f"{ctx.message.author.mention}\n{member.name} has {balance} happy coins!")
+            await ctx.send(f"{ctx.message.author.mention}\n{member.name} tem {balance} happy coins!")
 
     @commands.command()
-    async def pay(self, ctx, member: discord.User, money):
+    async def pagar(self, ctx, member: discord.User, money):
         database.load()
         try:
             balance = database[str(ctx.message.author.id)]
@@ -56,12 +56,12 @@ class Economy(commands.Cog):
 
         if int(money) > balance:
             await ctx.send(
-                f"{ctx.message.author.mention} you don't have enough happy coins to pay {money} happy coins to {member.mention}")
+                f"{ctx.message.author.mention} você não tem happy coins suficientes para pagar {money} happy coins para {member.mention}")
         else:
             database[str(member.id)] = receiverbalance + int(money)
             database[str(ctx.message.author.id)] = balance - int(money)
 
-            embed = discord.Embed(title="The payment was a success!",
-                                  description=f"{ctx.message.author.mention} your payment of {money} happy coins to {member.mention} was a success!",
+            embed = discord.Embed(title="O pagamento foi um sucesso!",
+                                  description=f"{ctx.message.author.mention} o seu pagamento de {money} happy coins para {member.mention} foi um sucesso!",
                                   color=discord.Colour.orange())
             await ctx.send(embed=embed)

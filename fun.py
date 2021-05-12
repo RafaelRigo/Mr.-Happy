@@ -20,7 +20,7 @@ class Fun(commands.Cog):
         if player == bot:
             await ctx.send("You chose " + player +
                                        " and I chose " + bot + ".")
-            await ctx.send("It's a tie! :scale:")
+            await ctx.send("It's a tie! :scales:")
 
         elif player == 'rock':
             if bot == 'scissors':
