@@ -34,18 +34,18 @@ async def help(ctx):
 @help.command()
 async def economy(ctx):
     embed = discord.Embed(title='Economy', description='All the economy commands', color=discord.Colour.orange())
-    embed.add_field(name='work', value='work and get some money\n**Usage:**\n`=work`')
-    embed.add_field(name='money', value='check your money or another user\'s money\n**Usage:**\n`=money [@user]`')
-    embed.add_field(name='pay', value='give money to other users\n**Usage:**\n`=pay <@user> <amount>`')
+    embed.add_field(name='work', value='work and get some money\n\n**Usage:**\n`=work`')
+    embed.add_field(name='money', value='check your money or another user\'s money\n\n**Usage:**\n`=money [@user]`')
+    embed.add_field(name='pay', value='give money to other users\n\n**Usage:**\n`=pay <@user> <amount>`')
     
     await ctx.send(embed=embed)
 
 @help.command()
 async def fun(ctx):
     embed = discord.Embed(title='Fun', description='All the fun commands', color=discord.Colour.orange())
-    embed.add_field(name='ping', value='ping pong!\n**Usage:**\n`=ping`')
-    embed.add_field(name='say', value='make me say a word\n**Usage:**\n`=say <word>`')
-    embed.add_field(name='rps', value='rock paper scissors\n**Usage:**\n`=rps <rock, paper or scissors>`')
+    embed.add_field(name='ping', value='ping pong!\n\n**Usage:**\n`=ping`')
+    embed.add_field(name='say', value='make me say a word\n\n**Usage:**\n`=say <word>`')
+    embed.add_field(name='rps', value='rock paper scissors\n\n**Usage:**\n`=rps <rock, paper or scissors>`')
     
     await ctx.send(embed=embed)
 
