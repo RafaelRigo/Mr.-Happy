@@ -17,16 +17,6 @@ class Fun(commands.Cog):
         await ctx.send(msg_to_say)
 
     @commands.command(
-        name="spam",
-        brief="A spam command",
-        help=
-        "Make me spam a word in a range of 1 - 100."
-    )
-    async def spam(self, ctx, word, times: int):
-        for i in range(times):
-            await ctx.send(word)
-
-    @commands.command(
         name="rps",
         brief="A rock paper scissors game",
         help=
@@ -78,54 +68,3 @@ class Fun(commands.Cog):
         else:
             await ctx.send(
                 "This move doesn't exist silly! :laughing:")
-    @commands.command(
-        name="ppt",
-        brief="Rock paper scissors in portuguese.",
-        help="Um pedra papel tesoura normal. Pedra vence tesoura, tesoura vence papel e papel vence pedra."
-    )
-    async def ppt(self, ctx, jogada):
-        choices = ['pedra', 'papel', 'tesoura']
-        bot = random.choice(choices).lower()
-        player = jogada
-
-        if player == bot:
-            await ctx.send("Você escolheu " + player +
-                                       " e eu escolhi " + bot + ".")
-            await ctx.send('Deu um empate! :clap:')
-
-        elif player == 'pedra':
-            if bot == 'tesoura':
-                await ctx.send("Você escolheu " + player +
-                                           " e eu escolhi " + bot + ".")
-                await ctx.send('Você venceu! :sob:')
-            else:
-                await ctx.send("Você escolheu " + player +
-                                           " e eu escolhi " + bot + ".")
-                await ctx.send(
-                    "Eu venci! :stuck_out_tongue_winking_eye:")
-
-        elif player == "tesoura":
-            if bot == "papel":
-                await ctx.send("Você escolheu " + player +
-                                           " e eu escolhi " + bot + ".")
-                await ctx.send("Você venceu! :sob:")
-            else:
-                await ctx.send("Você escolheu " + player +
-                                           " e eu escolhi " + bot + ".")
-                await ctx.send(
-                    "Eu venci! :stuck_out_tongue_winking_eye:")
-
-        elif player == "papel":
-            if bot == "pedra":
-                await ctx.send("Você escolheu " + player +
-                                           " e eu escolhi " + bot + ".")
-                await ctx.send("Você venceu! :sob:")
-            else:
-                await ctx.send("Você escolheu " + player +
-                                           " e eu escolhi " + bot + ".")
-                await ctx.send(
-                    "Eu venci! :stuck_out_tongue_winking_eye:")
-
-        else:
-            await ctx.send(
-                "Essa jogada não existe bobinho(a)! :laughing:")
