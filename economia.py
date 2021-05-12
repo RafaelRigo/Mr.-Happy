@@ -13,10 +13,10 @@ database = DB("EconomyDB", dbtoken)
 
 class Economia(commands.Cog):
     @commands.command()
-    @commands.cooldown(1, 43200, commands.BucketType.user)
+    @commands.cooldown(1, 60, commands.BucketType.user)
     async def trabalhar(self, ctx):
         database.load()
-        money = random.randint(1000, 4000)
+        money = random.randint(25, 100)
         embed = discord.Embed(title=f"{ctx.message.author}",
                               description=f"{ctx.message.author.mention} trabalhou duro e recebeu {money} happy coins!")
         await ctx.send(embed=embed)
