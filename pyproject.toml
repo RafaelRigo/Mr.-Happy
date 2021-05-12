@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Mr.-Happy"
-version = "0.1.6"
+version = "0.1.7"
 description = "A discord bot that has zen commands, an economy system, games and moderation"
 authors = ["Rafael Rigo rigo.f.rafa@gmail.com"]
 
@@ -9,9 +9,7 @@ python = "^3.8"
 discord = "^1.0.1"
 flask = "^1.1.2"
 replit = "^3.0.0"
-discord-pretty-help = "^1.3.0"
 easypydb = "^0.1"
-quart = "^0.14.1"
 python-dotenv = "^0.17.1"
 
 [tool.poetry.dev-dependencies]

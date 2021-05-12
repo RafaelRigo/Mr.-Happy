@@ -8,4 +8,4 @@ class Moderation(commands.Cog):
         if reason == None:
             reason = "being silly! :laughing:"
         await member.kick(reason=reason)
-        await ctx.send(f"{member} was kicked from the server for {reason} by {ctx.message.author}")
+        await ctx.send(f"{member.mention} was kicked from the server for {reason} by {ctx.message.author.mention}")
