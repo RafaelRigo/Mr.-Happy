@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Mr.-Happy"
-version = "0.1.7"
+version = "1.7.1"
 description = "A discord bot that has zen commands, an economy system, games and moderation"
 authors = ["Rafael Rigo rigo.f.rafa@gmail.com"]
 

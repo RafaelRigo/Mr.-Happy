@@ -18,8 +18,8 @@ TOKEN = os.getenv('TOKEN')
 
 
 bot = cmd.Bot(
-    command_prefix=['>', '~', '='],
-    description="A discord bot that has zen commands, an economy system, games and moderation",
+    command_prefix='=',
+    description="A discord bot that has its own economic system, a rock paper scissors game and commands that sends zen quotes.",
 )
 
 bot.remove_command('help')
@@ -27,7 +27,7 @@ bot.remove_command('help')
 
 @bot.group(invoke_without_command=True)
 async def help(ctx):
-    embed = discord.Embed(title='Help', description='My prefixes are >, ~, =', color=discord.Colour.orange())
+    embed = discord.Embed(title='Mr. Happy', description=f'{bot.description}', color=discord.Colour.orange())
     embed.add_field(name='Economy', value='`=help economy`')
     embed.add_field(name='Fun', value='`=help fun`')
     embed.add_field(name='Zen Quotes', value='`=help zen_quotes`')
@@ -66,7 +66,7 @@ async def zen_quotes(ctx):
 
 @bot.group(invoke_without_command=True)
 async def ajuda(ctx):
-    embed = discord.Embed(title='Ajuda', description='Meus prefixos são >, ~, =', color=discord.Colour.orange())
+    embed = discord.Embed(title='Mr. Happy', description='Um bot para o discord que tem seu próprio sistema de economia, um jogo de pedra papel tesoura e citações zen (não traduzidas para o português ainda).', color=discord.Colour.orange())
     embed.add_field(name='Economia', value='`=ajuda economia`')
     embed.add_field(name='Diversão', value='`=ajuda diversao`')
     embed.add_field(name='Moderação', value='`Em breve…`')
