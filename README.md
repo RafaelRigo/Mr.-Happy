@@ -1,2 +1,2 @@
 # Mr.-Happy
-A discord bot that has zen quotes, an economy system, games, moderation and much more
+A discord bot that has it's own economic system, a rock paper scissors game and commands that sends zen quotes.
