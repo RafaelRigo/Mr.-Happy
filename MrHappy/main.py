@@ -3,19 +3,19 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands as cmd
 
-from fun import Fun
-from economy import Economy
-from zen import ZenQuotes
-from moderation import Moderation
+from MrHappy.fun import Fun
+from MrHappy.economy import Economy
+from MrHappy.zen import ZenQuotes
+from MrHappy.moderation import Moderation
 
-from diversão import Diversao
-from economia import Economia
+from MrHappy.diversão import Diversao
+from MrHappy.economia import Economia
 
-from keep_alive import keep_alive
+from MrHappy.keep_alive import keep_alive
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
-
+    
 
 bot = cmd.Bot(
     command_prefix='=',
